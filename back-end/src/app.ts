@@ -12,7 +12,9 @@ import userRouter from "./routes/user.router.js";
 import chatRoutes from "./routes/chat.routes.js";
 
 const app = express();
-app.use(cors({ origin: ["http://localhost:5173", "http://localhost:5174"] })); // السماح للفرونت
+app.use(
+  cors({ origin: ["https://glamora.up.railway.app"], credentials: true }),
+); // السماح للفرونت
 app.use(express.json()); // للتعامل مع JSON body
 app.use("/uploads", express.static("uploads"));
 
