@@ -1,6 +1,6 @@
 import axios from "axios"; //HTTP client to fetch products from your backend.
 
-const API_BASE = "http://localhost:3000";
+const API_BASE = "http://glamora.up.railway.app";
 
 // Get all products, optionally filtered by categoryId
 export async function getProducts(categoryId) {

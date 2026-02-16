@@ -12,7 +12,7 @@ const getImageUrl = (img) => {
   if (img.startsWith("http://") || img.startsWith("https://")) return img;
   const cleanImg = img.startsWith("/") ? img.slice(1) : img; // Remove leading slash if present to avoid double slashes when appending to base
   const cleanPath = cleanImg.replace(/\\/g, "/"); //replace back slashed \ them with forward slashes /
-  return `http://localhost:3000/${cleanPath}`;
+  return `http://glamora.up.railway.app/${cleanPath}`;
 };
 
 export default function Cart() {

@@ -29,7 +29,7 @@ export default function Log_in() {
     //Handle login with email/password
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/login", {
+      const res = await axios.post("http://glamora.up.railway.app/login", {
         //Sends email & password to backend API /login.
         email,
         password,
@@ -66,7 +66,7 @@ export default function Log_in() {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      const res = await axios.post("http://localhost:3000/google", {
+      const res = await axios.post("http://glamora.up.railway.app/google", {
         //Sends the Google user info to your backend /google.
         email: user.email,
         name: user.displayName,

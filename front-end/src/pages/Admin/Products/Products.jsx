@@ -378,7 +378,7 @@ export default function Products() {
                           product.imageUrl
                             ? product.imageUrl.startsWith("http")
                               ? product.imageUrl
-                              : `http://localhost:3000${product.imageUrl.startsWith("/") ? "" : "/"
+                              : `http://glamora.up.railway.app${product.imageUrl.startsWith("/") ? "" : "/"
                               }${product.imageUrl}`
                             : "https://placehold.co/50x50"
                         }

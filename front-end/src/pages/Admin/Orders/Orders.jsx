@@ -38,7 +38,7 @@ export default function Orders() {
             } else {
               const cleanImg = img.startsWith("/") ? img.slice(1) : img;
               const cleanPath = cleanImg.replace(/\\/g, "/");
-              imageUrl = `http://localhost:3000/${cleanPath}`;
+              imageUrl = `http://glamora.up.railway.app/${cleanPath}`;
             }
           }
           return {
