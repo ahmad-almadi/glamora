@@ -1,0 +1,224 @@
+/* Product Card Styles - Dark Glass Theme */
+.glam-product-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.glam-product-card {
+  background: var(--color-glass, rgba(20, 20, 20, 0.75));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  /* border: 1px solid var(--border-glass, rgba(255, 255, 255, 0.1)); */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  height: auto;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
+
+.glam-product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 10px #ffcf40;
+  /* Darker shadow for depth */
+  border-color: #ffcf40;
+  /* Brighter border on hover */
+}
+
+/* Image Wrapper */
+.glam-image-wrapper {
+  position: relative;
+  aspect-ratio: 1 / 1.1;
+  background: #1a1a1a;
+  width: 100%;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+.glam-product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transition: transform 0.5s ease;
+}
+
+.glam-product-card:hover .glam-product-image {
+  transform: scale(1.05);
+}
+
+.glam-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 12px;
+  font-size: 0.7rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  background: #ffcf40;
+  color: #1a1a1a;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  z-index: 10;
+}
+
+.glam-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  /* Darker overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glam-product-card:hover .glam-overlay {
+  opacity: 1;
+}
+
+.glam-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transform: translateY(10px);
+  background: var(--color-white);
+  color: var(--color-dark);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.glam-product-card:hover .glam-add-btn {
+  transform: translateY(0);
+}
+
+.glam-add-btn:hover {
+  background: #ffcf40;
+  color: black;
+  box-shadow: 0 0 15px rgba(255, 207, 64, 0.5);
+}
+
+/* INFO SECTION */
+.glam-product-info {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 16px;
+  transition: color 0.3s ease;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 207, 64, 0.1) 0%,
+    rgba(255, 207, 64, .15) 35%,
+    rgba(255, 207, 64, 0.2) 70%,
+    rgba(255, 207, 64, 0.25) 100%
+  ) !important;
+}
+
+.glam-product-name {
+  color: var(--color-white) !important;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  opacity: 1;
+  line-height: 1.4;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.glam-price-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.glam-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-shadow: 0 0 10px rgba(255, 207, 64, 0.2);
+}
+
+/* Out of Stock Styles */
+.glam-product-card.out-of-stock {
+  opacity: 0.75;
+}
+
+.glam-product-card.out-of-stock:hover {
+  transform: none;
+  box-shadow: var(--shadow-lg);
+}
+
+.glam-product-card.out-of-stock .glam-product-image {
+  filter: grayscale(60%);
+}
+
+.glam-product-card.out-of-stock:hover .glam-product-image {
+  transform: none;
+}
+
+.out-of-stock-badge {
+  background: #ef4444 !important;
+  color: white !important;
+  font-size: 0.65rem !important;
+  padding: 6px 14px !important;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .glam-product-info {
+    padding: 12px;
+  }
+
+  .glam-product-name {
+    font-size: 0.9rem;
+  }
+
+  .glam-price {
+    font-size: 1rem;
+  }
+
+  .glam-badge {
+    padding: 4px 10px;
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glam-product-info {
+    padding: 10px;
+  }
+
+  .glam-product-name {
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+  }
+
+  .glam-price {
+    font-size: 0.95rem;
+  }
+
+  .glam-add-btn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+}

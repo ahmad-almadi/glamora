@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// --- Enums ---
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+// --- Models ---
+
+model User {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String
+  email        String   @unique
+  password     String?
+  role         Role     @default(USER)
+  authProvider String // "local" | "google"
+  googleId     String?
+  orders       Order[] // العلاقة العكسية للطلبات
+  createdAt    DateTime @default(now())
+}
+
+model Category {
+  id       String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name     String    @unique
+  products Product[]
+}
+
+model Product {
+  id          String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  price       Float
+  description String?
+  quantity    Int         @default(0)
+  isNew       Boolean     @default(false)
+  imageUrl    String?
+  categoryId  String?     @db.Uuid
+  category    Category?   @relation(fields: [categoryId], references: [id])
+  sizes       String[]    @default([])
+  colors      String[]    @default([])
+  variants    ProductVariant[]
+  orderItems  OrderItem[] // العلاقة العكسية لمشتريات المنتج
+  createdAt   DateTime    @default(now())
+}
+
+model ProductVariant {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String   @db.Uuid
+  size      String
+  color     String
+  stock     Int      @default(0)
+}
+
+model SiteSettings {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  storeName    String   @default("Glamora")
+  storeEmail   String   @default("contact@glamora.com")
+  storePhone   String   @default("+1 234 567 890")
+  storeAddress String   @default("123 Fashion Street, New York, NY 10001")
+  currency     String   @default("USD")
+  timezone     String   @default("America/New_York")
+  updatedAt    DateTime @updatedAt
+}
+
+model Order {
+  id              String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  orderNumber     String      @unique
+  user            User        @relation(fields: [userId], references: [id])
+  userId          String      @db.Uuid
+  items           OrderItem[]
+  totalAmount     Decimal     @db.Decimal(10, 2)
+  status          OrderStatus @default(PENDING)
+  shippingAddress String
+  paymentMethod   String? // "Cash", "Stripe", إلخ
+  paymentStatus   String      @default("UNPAID")
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String  @db.Uuid
+  product   Product @relation(fields: [productId], references: [id])
+  productId String  @db.Uuid
+  quantity  Int
+  price     Decimal @db.Decimal(10, 2) // السعر وقت الشراء لضمان ثبات التقارير المالية
+  size      String? // ضروري لمتجر الملابس
+  color     String? // إضافة اختيارية مفيدة
+}
+
+model ContactMessage {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  firstName String
+  lastName  String
+  email     String
+  subject   String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}

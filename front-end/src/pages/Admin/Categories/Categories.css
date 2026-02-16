@@ -1,0 +1,187 @@
+/* Categories.css */
+/* Enhanced Design for Admin Categories Page */
+
+.products-page {
+    animation: fadeIn 0.4s ease;
+}
+
+/* Table Enhancements */
+.admin-table-wrapper {
+    background: var(--admin-bg-card);
+    border: 1px solid var(--admin-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--admin-shadow-sm);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.admin-table th {
+    padding: 1.25rem 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--admin-text-muted);
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-table td {
+    padding: 1.25rem 1.5rem;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--admin-border);
+    transition: all 0.2s;
+}
+
+.admin-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-table tbody tr {
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.admin-table tbody tr:hover {
+    background-color: rgba(255, 207, 64, 0.03);
+    /* Subtle accent tint */
+}
+
+/* Category Name Column */
+.product-cell {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-left: 0.5rem;
+}
+
+.product-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #ffffff !important;
+}
+
+/* Products Column Alignment - Forced Center */
+
+.categories-page-specific .admin-table th:nth-child(2),
+.categories-page-specific .admin-table td:nth-child(2) {
+    text-align: center !important;
+
+}
+
+
+
+.categories-page-specific .admin-table td:nth-child(2) .status-badge {
+    margin: 0 auto !important;
+    /* Center the badge itself if it's block-level */
+}
+
+/* Product Count Badge */
+.status-badge.info {
+    background: rgba(59, 130, 246, 0.15);
+    /* Slightly stronger background */
+    color: #93c5fd;
+    /* Lighter blue for better contrast */
+    padding: 0.6rem 1.2rem;
+    /* Larger pill */
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 110px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Subtle depth */
+}
+
+/* Action Buttons */
+.categories-page-specific .admin-table th:last-child,
+.categories-page-specific .admin-table td:last-child {
+    text-align: right !important;
+    padding-right: 3% !important;
+}
+.categories-page-specific .admin-table th:last-child{
+  padding-right: 4% !important;
+}
+
+
+.admin-table th:last-child {
+    padding-right: 50px !important;
+}
+
+
+
+.categories-page-specific .admin-table .action-buttons {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: end !important;
+    width: 100%;
+}
+
+
+.action-btn {
+    width: 40px;
+    /* Slightly larger buttons */
+    height: 40px;
+    border-radius: 12px;
+    /* Softer corners */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--admin-text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.action-btn:hover {
+    background: var(--admin-accent);
+    color: var(--admin-bg-dark);
+    border-color: var(--admin-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 207, 64, 0.2);
+}
+
+.action-btn.danger:hover {
+    background: var(--admin-danger);
+    color: white;
+    border-color: var(--admin-danger);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+/* Modal Styles Reuse & Tweaks */
+.modal-content {
+    box-shadow: var(--admin-shadow-lg);
+    border: 1px solid var(--admin-border);
+}
+
+.toolbar-spacer {
+    flex: 1;
+}
+
+.form-group-mb {
+    margin-bottom: 1rem;
+}
+
+.text-center-mb-2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.text-sm-opacity {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+.modal-footer-center {
+    justify-content: center;
+}

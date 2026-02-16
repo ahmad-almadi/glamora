@@ -1,0 +1,90 @@
+.pagination-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding: 1rem;
+}
+
+.pagination-numbers {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border-glass, rgba(255, 255, 255, 0.1));
+    background-color: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-white);
+    transition: all 0.3s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    border-color: var(--color-primary);
+    color: var(--color-dark);
+    background-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 207, 64, 0.2);
+}
+
+.pagination-btn.active {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    border-color: var(--color-primary);
+    font-weight: 600;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: var(--border-glass);
+    background-color: transparent;
+    color: var(--color-text-muted);
+}
+
+.pagination-ellipsis {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
+    letter-spacing: 2px;
+}
+
+/* Control buttons (prev/next) styling specific if needed, but reusing base class is fine */
+.control-btn {
+    /* slightly distinct style if desired */
+    border: 1px solid var(--border-glass, rgba(255, 255, 255, 0.2));
+}
+
+@media (max-width: 480px) {
+    .pagination-container {
+        gap: 0.5rem;
+    }
+
+    .pagination-numbers {
+        gap: 0.25rem;
+    }
+
+    .pagination-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+    }
+
+    .pagination-ellipsis {
+        width: 20px;
+        font-size: 1rem;
+    }
+}

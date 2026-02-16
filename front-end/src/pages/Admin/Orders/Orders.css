@@ -1,0 +1,505 @@
+/* ===================================
+   Admin Orders Page Styles
+   =================================== */
+
+.orders-page {
+    animation: fadeIn 0.4s ease;
+}
+
+/* Order Stats */
+.order-stats {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 1200px) {
+    .order-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .order-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.order-stat-card {
+    background: var(--admin-bg-card);
+    border: 1px solid var(--admin-border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* All Orders - Gold */
+.order-stat-card.stat-all:hover,
+.order-stat-card.stat-all.active {
+    border-color: rgba(255, 207, 64, 0.3);
+    background: rgba(255, 207, 64, 0.05);
+}
+
+.order-stat-card.stat-all.active {
+    box-shadow: 0 0 15px rgba(255, 207, 64, 0.1);
+}
+
+/* Pending - Orange */
+.order-stat-card.stat-pending:hover,
+.order-stat-card.stat-pending.active {
+    border-color: rgba(245, 158, 11, 0.3);
+    background: rgba(245, 158, 11, 0.05);
+}
+
+.order-stat-card.stat-pending.active {
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.1);
+}
+
+/* Processing - Blue */
+.order-stat-card.stat-processing:hover,
+.order-stat-card.stat-processing.active {
+    border-color: rgba(59, 130, 246, 0.3);
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.order-stat-card.stat-processing.active {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
+}
+
+/* Shipped - Purple */
+.order-stat-card.stat-shipped:hover,
+.order-stat-card.stat-shipped.active {
+    border-color: rgba(168, 85, 247, 0.3);
+    background: rgba(168, 85, 247, 0.05);
+}
+
+.order-stat-card.stat-shipped.active {
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.1);
+}
+
+/* Delivered - Green */
+.order-stat-card.stat-delivered:hover,
+.order-stat-card.stat-delivered.active {
+    border-color: rgba(16, 185, 129, 0.3);
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.order-stat-card.stat-delivered.active {
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
+}
+
+/* Cancelled - Red */
+.order-stat-card.stat-cancelled:hover,
+.order-stat-card.stat-cancelled.active {
+    border-color: rgba(239, 68, 68, 0.3);
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.order-stat-card.stat-cancelled.active {
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.1);
+}
+
+.stat-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.stat-icon.all {
+    background: rgba(255, 207, 64, 0.15);
+    color: var(--admin-accent);
+}
+
+.stat-icon.pending {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--admin-warning);
+}
+
+.stat-icon.processing {
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--admin-info);
+}
+
+.stat-icon.shipped {
+    background: rgba(168, 85, 247, 0.15);
+    color: #a855f7;
+}
+
+.stat-icon.delivered {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--admin-success);
+}
+
+.stat-icon.cancelled {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--admin-danger);
+}
+
+.stat-content h4 {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--admin-text-muted);
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-content .stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--admin-text-primary);
+}
+
+/* Order Detail Modal */
+.order-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+    .order-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.detail-section {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+.detail-section-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--admin-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+.detail-label {
+    font-size: 0.85rem;
+    color: var(--admin-text-muted);
+}
+
+.detail-value {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--admin-text-primary);
+}
+
+/* Order Items in Modal */
+.orders-page .order-items-list {
+    margin-top: 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 1px solid var(--admin-border);
+}
+
+.orders-page .order-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--admin-border);
+    border-radius: 10px;
+    margin-bottom: 0.75rem;
+}
+
+.order-item:last-child {
+    margin-bottom: 0;
+}
+
+.order-item-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.order-item-details {
+    flex: 1;
+}
+
+.order-item-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--admin-text-primary);
+    margin-bottom: 0.2rem;
+}
+
+.order-item-meta {
+    font-size: 0.8rem;
+    color: var(--admin-text-muted);
+}
+
+.order-item-price {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--admin-accent);
+}
+
+/* Status Selector */
+.status-select-wrapper {
+    position: relative;
+}
+
+.status-select {
+    padding: 0.5rem 2rem 0.5rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    appearance: none;
+    text-align: center;
+    text-align-last: center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+}
+
+.status-select:focus {
+    outline: none;
+}
+
+.status-select option {
+    background-color: var(--admin-bg-secondary);
+    color: var(--admin-text-primary);
+    padding: 0.5rem;
+    font-weight: 500;
+}
+
+.status-select.pending {
+    background-color: rgba(245, 158, 11, 0.15);
+    color: var(--admin-warning);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.status-select.pending:hover {
+    background-color: rgba(245, 158, 11, 0.25);
+}
+
+.status-select.pending:focus {
+    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3);
+}
+
+.status-select.processing {
+    background-color: rgba(59, 130, 246, 0.15);
+    color: var(--admin-info);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.status-select.processing:hover {
+    background-color: rgba(59, 130, 246, 0.25);
+}
+
+.status-select.processing:focus {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+.status-select.shipped {
+    background-color: rgba(168, 85, 247, 0.15);
+    color: #a855f7;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.status-select.shipped:hover {
+    background-color: rgba(168, 85, 247, 0.25);
+}
+
+.status-select.shipped:focus {
+    box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.3);
+}
+
+.status-select.delivered {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: var(--admin-success);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.status-select.delivered:hover {
+    background-color: rgba(16, 185, 129, 0.25);
+}
+
+.status-select.delivered:focus {
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+}
+
+.status-select.cancelled {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: var(--admin-danger);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.status-select.cancelled:hover {
+    background-color: rgba(239, 68, 68, 0.25);
+}
+
+.status-select.cancelled:focus {
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.3);
+}
+
+/* Order Timeline */
+.order-timeline {
+    padding: 1rem 0;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 1.5rem;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 28px;
+    bottom: 0;
+    width: 2px;
+    background: var(--admin-border);
+}
+
+.timeline-item:last-child::before {
+    display: none;
+}
+
+.timeline-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--admin-bg-card);
+    border: 2px solid var(--admin-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 1;
+}
+
+.timeline-dot.completed {
+    background: var(--admin-success);
+    border-color: var(--admin-success);
+    color: white;
+}
+
+.timeline-dot i {
+    font-size: 0.6rem;
+}
+
+.timeline-content h4 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--admin-text-primary);
+    margin-bottom: 0.2rem;
+}
+
+.timeline-content p {
+    font-size: 0.75rem;
+    color: var(--admin-text-muted);
+}
+
+/* Center Status & Actions Columns */
+.orders-page .admin-table th:nth-child(6),
+.orders-page .admin-table td:nth-child(6),
+.orders-page .admin-table th:last-child,
+.orders-page .admin-table td:last-child {
+    text-align: center;
+}
+
+.orders-page .action-buttons {
+    justify-content: center !important;
+    margin: 0 !important;
+}
+
+/* Extracted Styles */
+.order-id-cell {
+    font-family: monospace;
+    font-weight: 600;
+}
+
+.text-secondary-sm {
+    color: var(--admin-text-secondary);
+    font-size: 0.85rem;
+}
+
+.text-secondary {
+    color: var(--admin-text-secondary);
+}
+
+.order-total {
+    font-weight: 600;
+    color: var(--admin-accent);
+}
+
+.empty-state-container {
+    padding: 3rem;
+    text-align: center;
+}
+
+.empty-state-icon {
+    font-size: 3rem;
+    opacity: 0.3;
+    margin-bottom: 1rem;
+}
+
+.empty-state-text {
+    color: var(--admin-text-muted);
+}
+
+.modal-content.medium {
+    max-width: 700px;
+}
+
+.address-text {
+    color: var(--admin-text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.modal-total-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    margin-top: 0.75rem;
+    background: rgba(255, 207, 64, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 207, 64, 0.2);
+}
+
+.total-label {
+    font-weight: 600;
+    color: var(--admin-text-primary);
+}
+
+.total-value {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--admin-accent);
+}
+
+.mt-6 {
+    margin-top: 1.5rem;
+}
