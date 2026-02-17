@@ -53,9 +53,15 @@ export default function Sign_up() {
       }
     } catch (err) {
       console.error("Signup failed:", err); // for developer
-      setError(
-        err.response?.data?.message || "Signup failed. Please try again.", //for user
-      );
+      
+      // Check if backend is not deployed (405 or HTML response)
+      if (err.response?.status === 405 || err.code === 'ERR_BAD_REQUEST') {
+        setError("❌ Backend server not deployed. Please deploy backend to Railway first.");
+      } else {
+        setError(
+          err.response?.data?.message || "Signup failed. Please try again.", //for user
+        );
+      }
     }
   };
   const handleGoogleSignUp = async () => {
@@ -76,7 +82,13 @@ export default function Sign_up() {
       navigate("/");
     } catch (err) {
       console.error("Signup failed:", err); // for developer
-      setError("Signup failed. Please try again");
+      
+      // Check if backend is not deployed (405 or HTML response)
+      if (err.response?.status === 405 || err.code === 'ERR_BAD_REQUEST') {
+        setError("❌ Backend server not deployed. Please deploy backend to Railway first.");
+      } else {
+        setError("Signup failed. Please try again");
+      }
     }
   };
   return (

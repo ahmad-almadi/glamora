@@ -13,6 +13,13 @@ export async function getProducts(categoryId) {
 
     const res = await axios.get(url);
     
+    // Check if response is HTML (backend not deployed)
+    if (typeof res.data === 'string' && res.data.includes('<!DOCTYPE html>')) {
+      console.error("❌ BACKEND NOT DEPLOYED: API is returning HTML instead of JSON");
+      console.error("Please deploy your backend to Railway and update VITE_API_URL in .env");
+      return [];
+    }
+    
     // Ensure we always return an array
     if (Array.isArray(res.data)) {
       return res.data;
@@ -30,6 +37,13 @@ export async function getProducts(categoryId) {
 export async function getCategories() {
   try {
     const res = await axios.get(`${API_BASE}/products/categories`);
+    
+    // Check if response is HTML (backend not deployed)
+    if (typeof res.data === 'string' && res.data.includes('<!DOCTYPE html>')) {
+      console.error("❌ BACKEND NOT DEPLOYED: API is returning HTML instead of JSON");
+      console.error("Please deploy your backend to Railway and update VITE_API_URL in .env");
+      return [];
+    }
     
     // Ensure we always return an array
     if (Array.isArray(res.data)) {
