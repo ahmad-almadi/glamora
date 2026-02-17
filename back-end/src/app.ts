@@ -13,32 +13,16 @@ import chatRoutes from "./routes/chat.routes.js";
 
 const app = express();
 
-// CORS configuration - allow both production and development
-const allowedOrigins = [
-  "https://glamora.up.railway.app",
-  "http://localhost:5173",
-  "http://localhost:3000",
-  process.env.FRONTEND_URL, // Add environment variable support
-].filter(Boolean); // Remove undefined values
+// Trust proxy - required for Railway
+app.set('trust proxy', 1);
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-      
-      if (allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        console.log("Blocked by CORS:", origin);
-        callback(null, true); // Allow all origins for now to debug
-      }
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+// CORS configuration - TEMPORARILY allow all origins for debugging
+app.use(cors({
+  origin: true, // Allow all origins
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
 
 // Handle preflight requests BEFORE other middleware
 app.options("*", cors());
@@ -75,6 +59,16 @@ app.use((req, res) => {
     error: "Route not found",
     method: req.method,
     path: req.path 
+  });
+});
+
+// Error handling middleware
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error('Error:', err);
+  res.status(err.status || 500).json({
+    error: err.message || 'Internal Server Error',
+    path: req.path,
+    method: req.method
   });
 });
 
