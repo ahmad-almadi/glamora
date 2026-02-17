@@ -25,9 +25,26 @@ async function start() {
     await prisma.$connect();
     console.log("✅ DB connected successfully");
 
-    app.listen(port, '0.0.0.0', () => {
+    const server = app.listen(port, '0.0.0.0', () => {
       console.log(`✅ Server running on port ${port}`);
-      console.log(`🌐 Health check: http://localhost:${port}/health`);
+      console.log(`🌐 Health check: http://0.0.0.0:${port}/health`);
+    });
+
+    // Handle shutdown gracefully
+    process.on('SIGTERM', async () => {
+      console.log('SIGTERM received, closing server gracefully...');
+      server.close(async () => {
+        await prisma.$disconnect();
+        process.exit(0);
+      });
+    });
+
+    process.on('SIGINT', async () => {
+      console.log('SIGINT received, closing server gracefully...');
+      server.close(async () => {
+        await prisma.$disconnect();
+        process.exit(0);
+      });
     });
   } catch (err) {
     console.error("❌ Failed to start server:", err);
@@ -35,12 +52,5 @@ async function start() {
     process.exit(1);
   }
 }
-
-// Handle shutdown gracefully
-process.on('SIGTERM', async () => {
-  console.log('SIGTERM received, closing server...');
-  await prisma.$disconnect();
-  process.exit(0);
-});
 
 start();
