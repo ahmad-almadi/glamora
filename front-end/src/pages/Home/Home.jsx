@@ -17,11 +17,19 @@ export default function Home() {
       try {
         const products = await getProducts(); //Calls getProducts() which fetches all products from backend
 
-        setNewArrivals(products.filter((p) => p.isNew && p.quantity > 0).slice(0, 5)); //get 4 item New
-
-        setFeaturedProducts(products.filter((p) => !p.isNew && p.quantity > 0).slice(0, 10)); //get 8 item not New
+        // Ensure products is an array
+        if (Array.isArray(products)) {
+          setNewArrivals(products.filter((p) => p.isNew && p.quantity > 0).slice(0, 5)); //get 4 item New
+          setFeaturedProducts(products.filter((p) => !p.isNew && p.quantity > 0).slice(0, 10)); //get 8 item not New
+        } else {
+          console.error("Products data is not an array:", products);
+          setNewArrivals([]);
+          setFeaturedProducts([]);
+        }
       } catch (err) {
         console.error("Failed to fetch products:", err);
+        setNewArrivals([]);
+        setFeaturedProducts([]);
       }
     }
 

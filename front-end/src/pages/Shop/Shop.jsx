@@ -20,9 +20,16 @@ export default function Shop() {
     async function fetchCategories() {
       try {
         const data = await getCategories();
-        setCategories(data);
+        // Ensure data is an array before setting state
+        if (Array.isArray(data)) {
+          setCategories(data);
+        } else {
+          console.error("Categories data is not an array:", data);
+          setCategories([]);
+        }
       } catch (err) {
-        console.error("Failed to fetch categories", err);
+        console.error("Failed to fetch categories:", err);
+        setCategories([]); // Set empty array on error
       }
     }
 
@@ -34,9 +41,16 @@ export default function Shop() {
     async function fetchProducts() {
       try {
         const data = await getProducts(selectedCategory);
-        setAllProducts(data);
+        // Ensure data is an array before setting state
+        if (Array.isArray(data)) {
+          setAllProducts(data);
+        } else {
+          console.error("Products data is not an array:", data);
+          setAllProducts([]);
+        }
       } catch (err) {
-        console.error("Failed to fetch products", err);
+        console.error("Failed to fetch products:", err);
+        setAllProducts([]); // Set empty array on error
       }
     }
 
@@ -55,11 +69,14 @@ export default function Shop() {
   // Derive unique sizes and colors from products for the sidebar
   const sizeOrder = ["XS", "S", "M", "L", "XL", "XXL"]; //custom order aRRAY
 
-  const uniqueSizes = [...new Set(allProducts.flatMap((p) => p.sizes || []))]
+  // Ensure allProducts is an array before using flatMap
+  const productsArray = Array.isArray(allProducts) ? allProducts : [];
+
+  const uniqueSizes = [...new Set(productsArray.flatMap((p) => p.sizes || []))]
     .filter((s) => s && s.trim() !== "")
     .sort((a, b) => sizeOrder.indexOf(a) - sizeOrder.indexOf(b));
   const uniqueColors = [
-    ...new Set(allProducts.flatMap((p) => p.colors || [])),
+    ...new Set(productsArray.flatMap((p) => p.colors || [])),
   ].filter((c) => c);
 
   // Fallback if no sizes/colors found (or while loading)
@@ -68,7 +85,7 @@ export default function Shop() {
   const colorsToDisplay =
     uniqueColors.length > 0 ? uniqueColors : ["#000000", "#FFFFFF", "#EF4444"];
 
-  const filteredProducts = allProducts.filter((product) => {
+  const filteredProducts = productsArray.filter((product) => {
     if (
       //If the product name does not include the search term → return false → exclude product
       searchTerm &&

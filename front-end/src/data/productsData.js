@@ -5,19 +5,43 @@ const API_BASE = import.meta.env.VITE_API_URL || "https://glamora.up.railway.app
 
 // Get all products, optionally filtered by categoryId
 export async function getProducts(categoryId) {
-  const url =
-    (categoryId && categoryId !== "all")
-      ? `${API_BASE}/products?categoryId=${categoryId}` // get all product filtered by category
-      : `${API_BASE}/products`; //get all prodcucts
+  try {
+    const url =
+      (categoryId && categoryId !== "all")
+        ? `${API_BASE}/products?categoryId=${categoryId}` // get all product filtered by category
+        : `${API_BASE}/products`; //get all prodcucts
 
-  const res = await axios.get(url);
-  return res.data;
+    const res = await axios.get(url);
+    
+    // Ensure we always return an array
+    if (Array.isArray(res.data)) {
+      return res.data;
+    } else {
+      console.error("API returned non-array data:", res.data);
+      return [];
+    }
+  } catch (error) {
+    console.error("Failed to fetch products:", error);
+    return []; // Return empty array on error
+  }
 }
 
 // Get all categories
 export async function getCategories() {
-  const res = await axios.get(`${API_BASE}/products/categories`);
-  return res.data;
+  try {
+    const res = await axios.get(`${API_BASE}/products/categories`);
+    
+    // Ensure we always return an array
+    if (Array.isArray(res.data)) {
+      return res.data;
+    } else {
+      console.error("API returned non-array data:", res.data);
+      return [];
+    }
+  } catch (error) {
+    console.error("Failed to fetch categories:", error);
+    return []; // Return empty array on error
+  }
 }
 
 // Get a single product by ID

@@ -11,11 +11,19 @@ export default function NewArrival() {
     async function fetchProducts() {
       try {
         const data = await getProducts(); //function that fetches all products from the backend API
-        // Filter only new products
-        const filtered = data.filter((product) => product.isNew); //Filters products where isNew === true
-        setNewProducts(filtered);
+        
+        // Ensure data is an array
+        if (Array.isArray(data)) {
+          // Filter only new products
+          const filtered = data.filter((product) => product.isNew); //Filters products where isNew === true
+          setNewProducts(filtered);
+        } else {
+          console.error("Products data is not an array:", data);
+          setNewProducts([]);
+        }
       } catch (err) {
-        console.error("Failed to fetch products", err);
+        console.error("Failed to fetch products:", err);
+        setNewProducts([]);
       }
     }
     fetchProducts();
