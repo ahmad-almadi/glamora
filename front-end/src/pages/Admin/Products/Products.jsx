@@ -378,7 +378,7 @@ export default function Products() {
                           product.imageUrl
                             ? product.imageUrl.startsWith("http")
                               ? product.imageUrl
-                              : `http://glamora.up.railway.app${product.imageUrl.startsWith("/") ? "" : "/"
+                              : `${import.meta.env.VITE_API_URL || "https://glamora.up.railway.app"}${product.imageUrl.startsWith("/") ? "" : "/"
                               }${product.imageUrl}`
                             : "https://placehold.co/50x50"
                         }

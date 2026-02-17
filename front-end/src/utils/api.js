@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create a custom axios instance with interceptors
 const api = axios.create({
-    baseURL: "http://glamora.up.railway.app",
+    baseURL: import.meta.env.VITE_API_URL || "https://glamora.up.railway.app",
 });
 
 // Request interceptor - automatically attach token to all requests

@@ -157,7 +157,7 @@ export default function ProductDetail() {
     if (img.startsWith("http://") || img.startsWith("https://")) return img;
     const cleanImg = img.startsWith("/") ? img.slice(1) : img; // Remove leading slash if present to avoid double slashes when appending to base
     const cleanPath = cleanImg.replace(/\\/g, "/"); //replace back slashed \ them with forward slashes /
-    return `http://glamora.up.railway.app/${cleanPath}`;
+    return `${import.meta.env.VITE_API_URL || "https://glamora.up.railway.app"}/${cleanPath}`;
   };
 
   const productImage = getImageUrl(product.imageUrl);

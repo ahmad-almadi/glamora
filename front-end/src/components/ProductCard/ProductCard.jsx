@@ -15,7 +15,7 @@ export default function ProductCard({ id, image, name, price, isNew, quantity, v
     if (img.startsWith("http://") || img.startsWith("https://")) return img;
     const cleanImg = img.startsWith("/") ? img.slice(1) : img;
     const cleanPath = cleanImg.replace(/\\/g, "/");
-    return `http://glamora.up.railway.app/${cleanPath}`;
+    return `${import.meta.env.VITE_API_URL || "https://glamora.up.railway.app"}/${cleanPath}`;
   };
   const imageUrl = getImageUrl(image);
 

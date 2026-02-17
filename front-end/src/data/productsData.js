@@ -1,6 +1,7 @@
+
 import axios from "axios"; //HTTP client to fetch products from your backend.
 
-const API_BASE = "http://glamora.up.railway.app";
+const API_BASE = import.meta.env.VITE_API_URL || "https://glamora.up.railway.app";
 
 // Get all products, optionally filtered by categoryId
 export async function getProducts(categoryId) {

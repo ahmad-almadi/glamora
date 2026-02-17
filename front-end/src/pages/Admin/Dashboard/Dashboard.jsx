@@ -369,7 +369,7 @@ export default function Dashboard() {
                     product.imageUrl
                       ? product.imageUrl.startsWith("http")
                         ? product.imageUrl
-                        : `http://glamora.up.railway.app${product.imageUrl.startsWith("/") ? "" : "/"}${product.imageUrl}`
+                        : `${import.meta.env.VITE_API_URL || "https://glamora.up.railway.app"}${product.imageUrl.startsWith("/") ? "" : "/"}${product.imageUrl}`
                       : "https://via.placeholder.com/44"
                   }
                   alt={product.name}
@@ -414,7 +414,7 @@ export default function Dashboard() {
                       product.imageUrl
                         ? product.imageUrl.startsWith("http")
                           ? product.imageUrl
-                          : `http://glamora.up.railway.app${product.imageUrl.startsWith("/") ? "" : "/"}${product.imageUrl}`
+                          : `${import.meta.env.VITE_API_URL || "https://glamora.up.railway.app"}${product.imageUrl.startsWith("/") ? "" : "/"}${product.imageUrl}`
                         : "https://via.placeholder.com/44"
                     }
                     alt={product.name}

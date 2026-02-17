@@ -6,10 +6,13 @@
   "author": "",
   "type": "module",
   "main": "index.js",
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "scripts": {
     "start": "npx prisma generate && npx prisma db push && npx tsx src/index.ts",
     "dev": "nodemon --exec npx tsx src/index.ts",
-    "seed": "npx tsx prisma/seed.ts"
+    "seed": "prisma db seed"
   },
   "dependencies": {
     "@google/genai": "^1.41.0",

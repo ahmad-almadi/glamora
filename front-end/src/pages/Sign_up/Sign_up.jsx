@@ -40,7 +40,7 @@ export default function Sign_up() {
         setError(error);
         return;
       }
-      const res = await axios.post("http://glamora.up.railway.app/signup", {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL || "https://glamora.up.railway.app"}/signup`, {
         name,
         email,
         password,
@@ -62,7 +62,7 @@ export default function Sign_up() {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      const res = await axios.post("http://glamora.up.railway.app/google", {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL || "https://glamora.up.railway.app"}/google`, {
         email: user.email,
         name: user.displayName,
         googleId: user.uid,
