@@ -1,22 +1,14 @@
 // src/prisma.ts
 import { PrismaClient } from "@prisma/client";
-import { Pool } from "pg";
-import { PrismaPg } from "@prisma/adapter-pg";
-import "dotenv/config"; // يقرأ DATABASE_URL من .env
+import "dotenv/config";
 
-// إنشاء Pool للاتصال بقاعدة البيانات
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+// Create PrismaClient instance
+export const prisma = new PrismaClient({
+  log: ['error', 'warn'],
 });
 
-// إنشاء Adapter
-const adapter = new PrismaPg(pool);
-
-// إنشاء PrismaClient مع Adapter
-export const prisma = new PrismaClient({ adapter });
-
-// دالة cleanup عند إغلاق السيرفر
+// Cleanup function when server closes
 export async function disconnect() {
   await prisma.$disconnect();
-  await pool.end();
 }
+
