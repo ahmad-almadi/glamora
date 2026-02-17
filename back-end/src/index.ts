@@ -2,6 +2,7 @@ import "dotenv/config";
 import app from "./app.js";
 import { prisma } from "./prisma.js";
 
+// Force Railway to use latest code
 const port = process.env.PORT || 3000;
 
 console.log("🚀 Starting server...");
