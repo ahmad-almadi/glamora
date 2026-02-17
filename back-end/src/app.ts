@@ -13,30 +13,17 @@ import chatRoutes from "./routes/chat.routes.js";
 
 const app = express();
 
-// Trust proxy - required for Railway
-app.set('trust proxy', 1);
 
-// CORS configuration - TEMPORARILY allow all origins for debugging
 app.use(cors({
-  origin: true, // Allow all origins
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  origin: "https://glamora.up.railway.app",
+  credentials: true
 }));
-
 app.use(express.json()); // للتعامل مع JSON body
 app.use("/uploads", express.static("uploads"));
 
-// Debug middleware to log all requests
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.path}`);
-  next();
-});
 
-// Health check endpoint
-app.get("/health", (req, res) => {
-  res.json({ status: "ok", timestamp: new Date().toISOString() });
-});
+
+
 
 app.use("/api/chat", chatRoutes);
 app.use("/login", loginRouter);
