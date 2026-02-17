@@ -24,9 +24,6 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
-// Handle preflight requests BEFORE other middleware
-app.options("*", cors());
-
 app.use(express.json()); // للتعامل مع JSON body
 app.use("/uploads", express.static("uploads"));
 
